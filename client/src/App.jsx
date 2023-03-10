@@ -9,16 +9,19 @@ import Footer from "./components/Footer"
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="container mx-auto">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="item/:itemId" element={<ItemDetails />} />
-          <Route path="checkout/success" element={<Confirmation />} />
-        </Routes>
+      <div className="relative">
+        <div className="container mx-auto">
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="item/:itemId" element={<ItemDetails />} />
+            <Route path="checkout/success" element={<Confirmation />} />
+          </Routes>
+        </div>
         <CartMenu />
+        <Footer />
       </div>
-      <Footer />
+
     </BrowserRouter>
   )
 }
