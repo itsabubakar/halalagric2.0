@@ -1,10 +1,14 @@
 import { useState } from "react"
 import Product from "./Product"
+import { useSelector } from "react-redux"
 
 const Products = () => {
     const [firstTab, setfirstTab] = useState(true)
     const [secondTab, setSecondTab] = useState(false)
     const [thirdTab, setThirdTab] = useState(false)
+
+    const dummyData = useSelector((state) => state.cart.dummyData)
+
 
     const showActive = (e) => {
         setfirstTab(false)
@@ -38,11 +42,12 @@ const Products = () => {
             </div>
             <div className="w-full my-10">
                 <div className={`w-full justify-center flex flex-wrap gap-12  ${firstTab ? 'block' : 'hidden'}`}>
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
+                    {
+                        dummyData.map((data) => {
+                            return <Product id={data.id} />
+                        })
+                    }
+
                 </div>
                 <div className={`w-full justify-center flex flex-wrap gap-12  ${secondTab ? 'block' : 'hidden'}`}>
                     <Product />
