@@ -4,6 +4,8 @@ const initialState = {
     isCartOpen: false,
     cart: [],
     items: [],
+    transactionId: [],
+    totalPrice: [],
     dummyData: [
         { price: 600, name: 'Tomato', id: 1, desc: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ' },
         { price: 600, name: 'Tomato', id: 2, desc: 'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ' },
@@ -22,6 +24,9 @@ export const cartSlice = createSlice({
     reducers: {
         setItems: (state, action) => {
             state.items = action.payload
+        },
+        emptyItems: (state, action) => {
+            state.cart = []
         },
         addToCart: (state, action) => {
             state.cart = [...state.cart, action.payload.item]
@@ -47,17 +52,26 @@ export const cartSlice = createSlice({
         },
         setIsCartOpen: (state) => {
             state.isCartOpen = !state.isCartOpen
+        },
+        totalCartPrice: (state, action) => {
+            state.totalPrice = action.payload
+        },
+        setTransactionId: (state, action) => {
+            state.transactionId = action.payload
         }
     }
 })
 
 export const {
     setItems,
+    setTransactionId,
     addToCart,
     increaseCount,
     decreaseCount,
     setIsCartOpen,
-    removeFromCart
+    removeFromCart,
+    totalCartPrice,
+    emptyItems
 } = cartSlice.actions
 
 export default cartSlice.reducer

@@ -1,11 +1,21 @@
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import Tomato from '../assets/tomato.jpg'
 import Product from "../components/Product"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Minus from "../assets/icons/Minus"
 import Add from "../assets/icons/Add"
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../redux/cartSlice"
+
+const ScrollToTop = () => {
+    const { pathname } = useLocation()
+
+    useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [pathname])
+
+    return null
+}
 
 const ItemDetails = () => {
     const { itemId } = useParams()
@@ -25,8 +35,9 @@ const ItemDetails = () => {
 
     return (
         <div className="my-10">
-            <div className="flex gap-10">
-                <div className="w-full lg:w-auto">
+            <ScrollToTop />
+            <div className="flex flex-wrap mx-5 gap-10 xl:px-20">
+                <div className="w-full lg:w-auto flex justify-center sm:block">
                     <img className="w-60 h-40" src={Tomato} alt="tomato" />
                 </div>
 
@@ -47,6 +58,7 @@ const ItemDetails = () => {
                     </div>
 
                 </div>
+
             </div>
             <div className="my-14">
                 <h3 className="text-center mb-8 text-xl font-semibold">Other Products</h3>

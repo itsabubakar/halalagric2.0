@@ -5,6 +5,10 @@ import ItemDetails from "./pages/ItemDetails"
 import Confirmation from "./pages/Confirmation"
 import CartMenu from "./components/CartMenu"
 import Footer from "./components/Footer"
+import Paystack from "./pages/Paystack"
+import PaymentSuccess from "./pages/PaymentSuccess"
+
+
 
 const App = () => {
   return (
@@ -15,7 +19,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="item/:itemId" element={<ItemDetails />} />
-            <Route path="checkout/success" element={<Confirmation />} />
+            <Route path="checkout" element={<Confirmation />} />
+            <Route path="payment" element={<Paystack />} />
+            <Route path="payment/success" element={<PaymentSuccess />} />
           </Routes>
         </div>
         <CartMenu />

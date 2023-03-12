@@ -9,7 +9,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-base-100 border-b mb-8">
             <div className="flex-1">
                 <Link to={'/'} className="hover:rounded-none btn btn-ghost normal-case text-xl text-green-500 rounded-none">Halal<span className="text-green-500">Agric</span></Link>
             </div>

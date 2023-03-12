@@ -1,0 +1,6 @@
+- [x] Build a checkout page
+- [] Get images on food items
+- [] Add images to cloudinary
+- [] Set up backend
+- [] Push info to backend
+- [] Connect backend to frontend
