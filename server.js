@@ -5,7 +5,6 @@ const mongoose = require('mongoose')
 const connectDB = require('./config/db')
 const app = express()
 const path = require('path')
-
 const itemRoutes = require('./routes/itemsRoute')
 const PORT = process.env.PORT || 8000
 
