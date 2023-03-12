@@ -6,6 +6,7 @@ const Products = () => {
     const [firstTab, setfirstTab] = useState(true)
     const [secondTab, setSecondTab] = useState(false)
     const [thirdTab, setThirdTab] = useState(false)
+    const [forth, setForthTab] = useState(false)
 
     const dummyData = useSelector((state) => state.cart.dummyData)
 
@@ -30,15 +31,21 @@ const Products = () => {
             console.log('third')
             setThirdTab(true)
         }
+        if (e.target.classList.contains('forth')) {
+            console.log('third')
+            setForthTab(true)
+        }
+
         e.target.classList.add('tab-active')
     }
     return (
         <div className="my-10 flex flex-col items-center">
             <h2 className="text-center text-2xl mb-4">Our Products</h2>
             <div className="tabs gap-5">
-                <a onClick={showActive} className={`first tab tab-bordered tab-active`}>Tab 1</a>
-                <a onClick={showActive} className="second tab tab-bordered">Tab 2</a>
-                <a onClick={showActive} className="third tab tab-bordered">Tab 3</a>
+                <a onClick={showActive} className={`first tab tab-bordered tab-active`}>Groceries</a>
+                <a onClick={showActive} className="second tab tab-bordered">Fresh food and poltry</a>
+                <a onClick={showActive} className="third tab tab-bordered">Staple food</a>
+                <a onClick={showActive} className="fourth tab tab-bordered">Herbs</a>
             </div>
             <div className="w-full my-10">
                 <div className={`w-full justify-center flex flex-wrap gap-12  ${firstTab ? 'block' : 'hidden'}`}>

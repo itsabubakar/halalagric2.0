@@ -1,12 +1,9 @@
 Categories
 
     Groceries
-        indomie
         spagetti
-        spageti
         marcaroni
         semolina
-        indomie
         sugar
         honey
         salt
@@ -18,39 +15,39 @@ Categories
 
     Staple food
         
-         rice local
-        rice foreign
-        beans
-         white
-         red
-        big sized
+         <!-- rice local -->
+        <!-- rice foreign -->
+        <!-- beans -->
+         <!-- white -->
+         <!-- red -->
+        <!-- big sized -->
 
     Fresh food and poltry
-        spinach
+        <!-- spinach -->
         yakuwa
-        egusi
+        <!-- egusi -->
         ayo
         rama
-        okro
+        <!-- okro -->
         ram meat
-        cow meat
-        goat meat
-         Zabi eggs
-        quails eggs
-        chickens eggs
-        tilapia fish
-        catfish
-        tomato
-         mango
-        lemon
-        lime
-        orange
-        pineapple
-        grapefruit
-        apple
+        <!-- cow meat -->
+        <!-- goat meat -->
+         <!-- Zabi eggs -->
+        <!-- quails eggs -->
+        <!-- chickens eggs -->
+        <!-- tilapia fish -->
+        <!-- catfish -->
+        <!-- tomato -->
+         <!-- mango -->
+        <!-- lemon -->
+        <!-- lime -->
+        <!-- orange -->
+        <!-- pineapple -->
+        <!-- grapefruit -->
+        <!-- apple -->
 
     herbs
-        tumeric
-        ginger
-        garlic
-        moringa
+        <!-- tumeric -->
+        <!-- ginger -->
+        <!-- garlic -->
+        <!-- moringa -->
