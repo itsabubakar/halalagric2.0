@@ -12,11 +12,14 @@ connectDB()
 app.use(express.json())
 
 // routes
-app.get("/", (req, res) => {
-    res.send("Server is running")
-})
-
 app.use('/api/allitems', itemRoutes)
+
+// * Serve static assets in production, must be at this location of this file
+
+app.get('/', (req, res) => {
+    app.use(express.static(path.resolve(__dirname, 'client', 'dist')))
+    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
+})
 
 mongoose.connection.once('open', () => {
     app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`))
