@@ -5,12 +5,19 @@ import * as Yup from 'yup'
 import { emptyItems, setTransactionId } from '../redux/cartSlice'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import api from "../components/AxiosBase"
 
 
 const Paystack = () => {
     const price = useSelector((state) => state.cart.totalPrice)
+    const cart = useSelector((state) => state.cart.cart)
+
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+
+
+
 
     // formik logic
     const formik = useFormik({
@@ -29,12 +36,13 @@ const Paystack = () => {
 
             const paystack = new PaystackPop()
             paystack.newTransaction({
-                key: 'pk_test_886a2504096c40d75a18f0da8efa0866801730a1',
+                key: 'pk_live_9a13759caa958cb249c6f4c0f93c63f6f027de5e',
                 amount: price * 100,
                 email: values.email,
                 firstname: values.firstname,
                 lastname: values.lastname,
                 onSuccess(transaction) {
+                    postOrder(transaction.reference)
                     dispatch(emptyItems())
                     dispatch(setTransactionId(transaction.reference))
                     navigate('/payment/success')
@@ -48,6 +56,25 @@ const Paystack = () => {
         }
     })
 
+    const postOrder = async (transactionId) => {
+        const firstName = formik.values.firstname
+        const lastName = formik.values.lastname
+        const phone = formik.values.phone
+        const email = formik.values.email
+        const address = formik.values.address
+
+        const orderInfo = { cart, price, transactionId, phone, email, address, firstName, lastName }
+
+        try {
+
+            const { data } = await api.post('/api/order', orderInfo)
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
     return (
         // < !--component -- >
         <div className="grid min-h-screen place-items-center">
@@ -59,7 +86,7 @@ const Paystack = () => {
                     {/* Names */}
                     <div className="flex justify-between gap-3 mb-4">
                         <span className="w-1/2">
-                            <label for="firstname" className="block text-xs font-semibold text-gray-600 uppercase">Firstname</label>
+                            <label htmlFor="firstname" className="block text-xs font-semibold text-gray-600 uppercase">Firstname</label>
                             <input
                                 value={formik.values.firstname}
                                 onChange={formik.handleChange}
@@ -73,7 +100,7 @@ const Paystack = () => {
                                 value={formik.values.lastname}
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                id="lastname" type="text" name="lastname" placeholder="Hyatudeen" autocomplete="family-name" className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+                                id="lastname" type="text" name="lastname" placeholder="Hyatudeen" autoComplete="family-name" className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
                         </span>
                     </div>
 
@@ -86,9 +113,9 @@ const Paystack = () => {
                         id="email" type="email" name="email" placeholder="Hauwa.Hyatudeen@abc.com" autocomplete="email" className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner mb-4" required />
 
                     {/* Amount */}
-                    <label for="amount" className="block mt-2 text-xs font-semibold text-gray-600 uppercase">Amount</label>
+                    {/* <label for="amount" className="block mt-2 text-xs font-semibold text-gray-600 uppercase">Amount</label>
                     <input
-                        readOnly value={price} id="amount" type="text" name="amount" className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner mb-4" required />
+                        readOnly value={price} id="amount" type="text" name="amount" className="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner mb-4" required /> */}
 
                     {/* Phone number */}
                     <label for="phone" className="block mt-2 text-xs font-semibold text-gray-600 uppercase">Phone Number</label>

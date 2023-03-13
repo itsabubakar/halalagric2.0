@@ -1,6 +1,6 @@
 Categories
 
-    Groceries
+    groceries
         spagetti
         marcaroni
         semolina
@@ -13,7 +13,7 @@ Categories
         black sead oil
         olive oil
 
-    Staple food
+    staple food
         
          <!-- rice local -->
         <!-- rice foreign -->

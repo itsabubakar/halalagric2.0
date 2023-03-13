@@ -28,8 +28,8 @@ const Confirmation = () => {
                         {cart.map((item, index) => (
                             <tr>
                                 <th>{index + 1}</th>
-                                <td>{item[0].name}</td>
-                                <td>{item[0].price * item.count} NGN</td>
+                                <td>{item.name}</td>
+                                <td>{item.price * item.count} NGN</td>
                                 <td>{item.count}</td>
                             </tr>
                         ))}

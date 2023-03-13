@@ -6,16 +6,8 @@ import Minus from "../assets/icons/Minus"
 import Add from "../assets/icons/Add"
 import { useDispatch, useSelector } from "react-redux"
 import { addToCart } from "../redux/cartSlice"
+import api from "../components/AxiosBase"
 
-const ScrollToTop = () => {
-    const { pathname } = useLocation()
-
-    useEffect(() => {
-        window.scrollTo(0, 0)
-    }, [pathname])
-
-    return null
-}
 
 const ItemDetails = () => {
     const { itemId } = useParams()
@@ -23,10 +15,26 @@ const ItemDetails = () => {
     const dispatch = useDispatch()
     const cart = useSelector((state) => state.cart.cart)
     const dummmyCart = useSelector((state) => state.cart.dummyData)
+    const [item, setItem] = useState()
 
-    const item = dummmyCart.filter((item) => item.id == itemId)
-    // console.log(item)
+    // const item = dummmyCart.filter((item) => item.id == itemId)
+    // // console.log(item)
 
+
+    const findItem = async () => {
+        try {
+            const { data } = await api.get(`/api/allitems/oneitem?itemId=${itemId}`)
+            console.log(data)
+            setItem(data)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        findItem()
+    }, [])
 
     const addTo = () => {
         console.log('cart', cart)
@@ -34,18 +42,20 @@ const ItemDetails = () => {
     }
 
     return (
-        <div className="my-10">
-            <ScrollToTop />
+        <div className="my-20">
             <div className="flex flex-wrap mx-5 gap-10 xl:px-20">
                 <div className="w-full lg:w-auto flex justify-center sm:block">
-                    <img className="w-60 h-40" src={Tomato} alt="tomato" />
+                    <img className="w-60 h-40" src={item?.img} alt="tomato" />
                 </div>
 
                 <div className="max-w-lg">
-                    <h3 className="font-bold mb-2">Halal Tomatos</h3>
-                    <p className="font-semibold mb-2">600</p>
+                    <h3 className="font-bold mb-2">Halal {item?.name}</h3>
+                    <p className="font-semibold mb-2">NGN {item?.price}</p>
                     <p className="text-gray-700">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique et, dolorem fugit quos rem blanditiis maxime, fuga esse dolor commodi, eius expedita vero mollitia quasi sit molestiae debitis quis facilis?</p>
+                        You save more by buying online from Halal Agric Online Supermarket.
+                        It's always easy to shop here because you can browse multiple food items and compare prices .
+
+                    </p>
                     <div className="flex gap-5 items-center">
                         <div className="flex justify-between my-3 py-1 px-2 border-2 w-24">
                             <button onClick={() => setCount(Math.max(count - 1, 0))}><Minus /></button>
@@ -60,17 +70,6 @@ const ItemDetails = () => {
                 </div>
 
             </div>
-            <div className="my-14">
-                <h3 className="text-center mb-8 text-xl font-semibold">Other Products</h3>
-                <div className={` w-full justify-center flex flex-wrap gap-12`}>
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                    <Product />
-                </div>
-            </div>
-
         </div>
     )
 }
