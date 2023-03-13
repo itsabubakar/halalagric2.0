@@ -15,7 +15,7 @@ const Products = () => {
 
     const fetchItem = async () => {
         try {
-            const { data } = await api.get('http://localhost:5000/api/allitems')
+            const { data } = await api.get('/api/allitems')
             dispatch(setItems(data))
             console.log(herbs)
 
