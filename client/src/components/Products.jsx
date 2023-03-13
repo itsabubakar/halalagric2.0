@@ -77,8 +77,8 @@ const Products = () => {
     }
     return (
         <div className="my-10 flex flex-col items-center">
-            <h2 className="text-center text-2xl mb-4">Our Products</h2>
-            <div className="tabs gap-5">
+            <h2 className="text-center text-2xl mb-4 ">Our Products</h2>
+            <div className="tabs justify-center gap-5">
                 <a onClick={showActive} className={`first tab tab-bordered tab-active`}>Fresh food and poltry</a>
                 <a onClick={showActive} className="second tab tab-bordered">Groceries</a>
                 <a onClick={showActive} className="third tab tab-bordered">Staple food</a>
