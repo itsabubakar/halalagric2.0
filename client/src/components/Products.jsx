@@ -3,23 +3,31 @@ import Product from "./Product"
 import { useDispatch, useSelector } from "react-redux"
 import api from "./AxiosBase"
 import { setItems } from '../redux/cartSlice'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const Products = () => {
     const [firstTab, setfirstTab] = useState(true)
     const [secondTab, setSecondTab] = useState(false)
     const [thirdTab, setThirdTab] = useState(false)
     const [forthTab, setForthTab] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const items = useSelector((state) => state.cart.items)
     const dispatch = useDispatch()
 
     const fetchItem = async () => {
+        setLoading(true)
         try {
             const { data } = await api.get('/api/allitems')
             dispatch(setItems(data))
+            setLoading(false)
+
             console.log(herbs)
 
         } catch (error) {
+            setLoading(false)
+
             console.log(error)
         }
     }
@@ -87,62 +95,127 @@ const Products = () => {
             <div className="w-full my-10">
                 <div className={`w-full justify-center flex flex-wrap gap-12  ${firstTab ? 'block' : 'hidden'}`}>
 
-                    {
-                        freshFoodAndPoltry.map(({ _id, price, name, img, category }) => {
-                            return <div key={_id}><Product
-                                category={category}
-                                id={_id}
-                                price={price}
-                                name={name}
-                                img={img}
-                            />
+                    {loading ? freshFoodAndPoltry.map(({ _id, price, name, img, category }) => {
+                        return <SkeletonTheme baseColor="#d5dfd8" highlightColor="#dcf8dc">
+                            <div className="flex flex-col">
+                                <div className="">
+                                    <Skeleton width={200} height={192} />
+                                </div>
+                                <div className="mt-1">
+                                    <Skeleton height={5} width={100} count={1} />
+                                </div>
+                                <div className="mt-[-15px]">
+                                    <Skeleton height={8} width={200} count={1} />
+                                </div>
+                                <div className="mt-[-10px]">
+                                    <Skeleton height={5} width={200} count={1} />
+                                </div>
+
                             </div>
-                        })
-                    }
+                        </SkeletonTheme>
+                    }) : freshFoodAndPoltry.map(({ _id, price, name, img, category }) => {
+                        return <div key={_id}><Product
+                            category={category}
+                            id={_id}
+                            price={price}
+                            name={name}
+                            img={img}
+                        />
+                        </div>
+                    })}
+
                 </div>
 
                 <div className={`w-full justify-center flex flex-wrap gap-12  ${secondTab ? 'block' : 'hidden'}`}>
-                    {
-                        groceries.map(({ _id, price, name, img, category }) => {
-                            return <div key={_id}><Product
-                                category={category}
-                                id={_id}
-                                price={price}
-                                name={name}
-                                img={img}
-                            />
+                    {loading ? groceries.map(({ _id, price, name, img, category }) => {
+                        return <SkeletonTheme baseColor="#d5dfd8" highlightColor="#dcf8dc">
+                            <div className="flex flex-col">
+                                <div className="">
+                                    <Skeleton width={200} height={192} />
+                                </div>
+                                <div className="mt-1">
+                                    <Skeleton height={5} width={100} count={1} />
+                                </div>
+                                <div className="mt-[-15px]">
+                                    <Skeleton height={8} width={200} count={1} />
+                                </div>
+                                <div className="mt-[-10px]">
+                                    <Skeleton height={5} width={200} count={1} />
+                                </div>
+
                             </div>
-                        })
-                    }
+                        </SkeletonTheme>
+                    }) : groceries.map(({ _id, price, name, img, category }) => {
+                        return <div key={_id}><Product
+                            category={category}
+                            id={_id}
+                            price={price}
+                            name={name}
+                            img={img}
+                        />
+                        </div>
+                    })}
                 </div>
                 <div className={`w-full justify-center flex flex-wrap gap-12  ${thirdTab ? 'block' : 'hidden'}`}>
-                    {
-                        stapleFood.map(({ _id, price, name, img, category }) => {
-                            return <div key={_id}><Product
-                                category={category}
-                                id={_id}
-                                price={price}
-                                name={name}
-                                img={img}
-                            />
+                    {loading ? stapleFood.map(({ _id, price, name, img, category }) => {
+                        return <SkeletonTheme baseColor="#d5dfd8" highlightColor="#dcf8dc">
+                            <div className="flex flex-col">
+                                <div className="">
+                                    <Skeleton width={200} height={192} />
+                                </div>
+                                <div className="mt-1">
+                                    <Skeleton height={5} width={100} count={1} />
+                                </div>
+                                <div className="mt-[-15px]">
+                                    <Skeleton height={8} width={200} count={1} />
+                                </div>
+                                <div className="mt-[-10px]">
+                                    <Skeleton height={5} width={200} count={1} />
+                                </div>
+
                             </div>
-                        })
-                    }
+                        </SkeletonTheme>
+                    }) : stapleFood.map(({ _id, price, name, img, category }) => {
+                        return <div key={_id}><Product
+                            category={category}
+                            id={_id}
+                            price={price}
+                            name={name}
+                            img={img}
+                        />
+                        </div>
+                    })}
                 </div>
 
                 <div className={`w-full justify-center flex flex-wrap gap-12  ${forthTab ? 'block' : 'hidden'}`}>
-                    {
-                        herbs.map(({ _id, price, name, img, category }) => {
-                            return <div key={_id}><Product
-                                category={category}
-                                id={_id}
-                                price={price}
-                                name={name}
-                                img={img}
-                            />
+                    {loading ? herbs.map(({ _id, price, name, img, category }) => {
+                        return <SkeletonTheme baseColor="#d5dfd8" highlightColor="#dcf8dc">
+                            <div className="flex flex-col">
+                                <div className="">
+                                    <Skeleton width={200} height={192} />
+                                </div>
+                                <div className="mt-1">
+                                    <Skeleton height={5} width={100} count={1} />
+                                </div>
+                                <div className="mt-[-15px]">
+                                    <Skeleton height={8} width={200} count={1} />
+                                </div>
+                                <div className="mt-[-10px]">
+                                    <Skeleton height={5} width={200} count={1} />
+                                </div>
+
                             </div>
-                        })
-                    }
+                        </SkeletonTheme>
+                    }) : herbs.map(({ _id, price, name, img, category }) => {
+                        return <div key={_id}><Product
+                            category={category}
+                            id={_id}
+                            price={price}
+                            name={name}
+                            img={img}
+                        />
+                        </div>
+                    })}
                 </div>
 
             </div>
