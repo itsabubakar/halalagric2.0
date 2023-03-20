@@ -9,6 +9,7 @@ const app = express()
 const path = require('path')
 const itemRoutes = require('./routes/itemsRoute')
 const orderRoutes = require('./routes/orderRoute')
+const authRoutes = require('./routes/authRoutes')
 const PORT = process.env.PORT || 8000
 
 
@@ -19,6 +20,8 @@ app.use(cors())
 // routes
 app.use('/api/allitems', itemRoutes)
 app.use('/api/order', orderRoutes)
+app.use('/api/auth', authRoutes)
+
 
 // * Serve static assets in production, must be at this location of this file
 

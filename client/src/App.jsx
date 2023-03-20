@@ -7,6 +7,8 @@ import CartMenu from "./components/CartMenu"
 import Footer from "./components/Footer"
 import Paystack from "./pages/Paystack"
 import PaymentSuccess from "./pages/PaymentSuccess"
+import SignIn from "./pages/SignIn"
+import Login from "./pages/LogIn"
 
 
 
@@ -18,6 +20,8 @@ const App = () => {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/login" element={<Login />} />
             <Route path="item/:itemId" element={<ItemDetails />} />
             <Route path="checkout" element={<Confirmation />} />
             <Route path="payment" element={<Paystack />} />
