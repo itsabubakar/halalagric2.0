@@ -1,6 +1,6 @@
-const { User } = require('../models/UserModel')
-// const bcyrpt = require('bcrypt')
-// const jwt = require('jsonwebtoken')
+const User = require('../models/UserModel')
+const bcyrpt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 // handle errs
 function handleErrors(err) {
@@ -23,27 +23,33 @@ function handleErrors(err) {
 
 const maxAge = 24 * 60 * 60
 function createToken(id) {
-    return jwt.sign({ id }, 'sadiq b secret', {
+    return jwt.sign({ id }, 'jwtsecretkey', {
         expiresIn: maxAge
     })
 }
 
 async function signup(req, res) {
-    const { email, password } = req.body
+    const { email, pwd } = req.body
+    let password = pwd
+    const isEmail = await User.findOne({ email })
+
+    if (isEmail) {
+        console.log(isEmail)
+        return res.status(400).json('email exists')
+    }
+
     const salt = await bcyrpt.genSalt(10)
     const hashPwd = await bcyrpt.hash(password, salt)
-    const regularPwd = password
 
     try {
         let password = hashPwd
         const user = await User.create({ email, password })
         const userId = user._id
         const token = createToken(user._id)
-        res.status(201).json({ email, token, userId, regularPwd })
+        res.status(201).json({ email, token, userId })
     } catch (error) {
-        const errors = handleErrors(error)
-        console.log(errors)
-        res.status(400).json(errors)
+        console.log(error)
+        res.status(400).json(error)
     }
 }
 
@@ -74,17 +80,16 @@ async function gSignup(req, res) {
 }
 
 async function login(req, res) {
-    const { email, password } = req.body
+    const { email, pwd } = req.body
+    let password = pwd
     const user = await User.findOne({ email })
-    const regularPwd = password
 
     if (user) {
-        res.cookie('hello', 'test cookue')
         const auth = await bcyrpt.compare(password, user.password)
         if (auth) {
             const token = createToken(user._id)
             const userId = user._id
-            return res.status(201).json({ email, token, userId, regularPwd })
+            return res.status(201).json({ email, token, userId })
         }
         return res.status(400).json('password or email incorrect')
     }

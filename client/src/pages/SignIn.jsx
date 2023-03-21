@@ -1,29 +1,48 @@
+import { useState } from "react"
 import { Link } from "react-router-dom"
+import api from "../components/AxiosBase"
 
 const SignIn = () => {
+    const [email, setEmail] = useState()
+    const [pwd, setPwd] = useState()
+    const navigate = useNavigate()
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log(email, pwd);
+        try {
+            const { data } = await api.post('/api/auth/signup', { email, pwd })
+            localStorage.setItem("userInfo", JSON.stringify(data))
+            navigate('/')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="min-h-screen flex flex-col">
             <div className="container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
-                <div className="bg-white px-6 py-8 rounded shadow-lg text-black w-full">
+                <form onSubmit={handleSubmit} className="bg-white px-6 py-8 rounded shadow-2xl text-black w-full">
                     <h1 className="mb-8 text-3xl text-center">Sign up</h1>
 
 
                     <input
-                        type="text"
+                        onChange={(e) => setEmail(e.target.value)}
+                        type="email"
+                        required={true}
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="email"
                         placeholder="Email" />
 
+
                     <input
+                        onChange={(e) => setPwd(e.target.value)}
                         type="password"
+                        required={true}
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
                         placeholder="Password" />
-                    <input
-                        type="password"
-                        className="block border border-grey-light w-full p-3 rounded mb-4"
-                        name="confirm_password"
-                        placeholder="Confirm Password" />
 
                     <button
                         type="submit"
@@ -39,7 +58,7 @@ const SignIn = () => {
                             Privacy Policy
                         </a>
                     </div>
-                </div>
+                </form>
 
                 <div className="text-grey-dark mt-6">
                     Already have an account?

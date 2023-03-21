@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 
 const Product = ({ id, img, name, price, category }) => {
+    console.log(id)
     return (
         <Link key={id} to={`/item/${id}`}>
             <div className='shadow-md border pb-2'>

@@ -9,6 +9,9 @@ import Paystack from "./pages/Paystack"
 import PaymentSuccess from "./pages/PaymentSuccess"
 import SignIn from "./pages/SignIn"
 import Login from "./pages/LogIn"
+import Profile from "./pages/Profile"
+import Orders from "./pages/Orders"
+import SearchResults from "./pages/SearchResults"
 
 
 
@@ -22,6 +25,9 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<SignIn />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/searchResults" element={<SearchResults />} />
             <Route path="item/:itemId" element={<ItemDetails />} />
             <Route path="checkout" element={<Confirmation />} />
             <Route path="payment" element={<Paystack />} />

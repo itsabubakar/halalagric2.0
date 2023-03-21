@@ -20,7 +20,18 @@ const getOneItems = async (req, res) => {
     }
 }
 
+const searchItems = async (req, res) => {
+    const keyword = { name: { $regex: req.query.search, $options: "i" } }
+    try {
+        const items = await Item.find(keyword)
+        res.send(items)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 module.exports = {
     getAllItems,
-    getOneItems
+    getOneItems,
+    searchItems
 }
